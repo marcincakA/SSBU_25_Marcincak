@@ -14,7 +14,11 @@ Pridajte do kódu ďalší model strojového učenia (ľubovoľný), a taktiež 
 
 **Uveďte aký ML model a hodnoty jeho parametrov ste použili:**
 
-#TODO - Popis
+Pridal som Decision Tree ako parametre som zvolil
+
+- `max_depth`: [3,5,7,10,None] - to su hlbky, ktoré môže strom nadobudnuť. None => neobmedzená hĺbka.
+- `min_sample_split`: [2,5,10] - minimálny počet vzoriek na rozdelenie uzla
+- `min_sample_leaf`: [1,2,4] - minimalny počet vzoriek potrebných v liste(uzle)
 
 ### Úloha 2 (2b)
 
@@ -22,7 +26,7 @@ Implementujte ďalšiu (ľubovoľnú) metriku pre evaluáciu modelov. Nezabudnit
 
 **Uveďte akú metriku ste doplnili:**
 
-#TODO - Metrika
+`Matthews Correlation Coeficient` - užitočná ak je nevyvážený dataset
 
 ### Úloha 3 (1b)
 
@@ -32,7 +36,11 @@ Do implementácie pridajte ukladanie všetkých grafov, ktoré sa vytvárajú pr
 
 **V skripte `main.py`** nastavte počet replikácií na vyššie číslo (rozumne, podľa vlastného uváženia). Vykonajte beh aplikácie s Vašou implementáciou. Po skončení behu zanalyzujte vygenerované grafy a pár vetami popíšte ich interpretáciu. (Napr. v čom je ktorý ML model lepší, a pod.)
 
-#TODO - Interpretácia
+Mnou vybrany model nedosahoval lepšie výsledky ako Linearna regresia.  
+
+- `Accuracy per Replication and Average Accuracy` - priemerna presnosť Decision tree je 0.94 čo je horšie ako 0.98
+- `Confusion Matrix` - Decision Tree nespravne klasifikoval (falosne pozitiva, negativa) viac hodnôt ako LR.
+- `Density plots` - Logisticka regresia má presnejšie (viac vpravo, vyššie a užšie hodnoty), je menej citliva na zmenu parametrov.
 
 **Odovzdávanie riešenia:** Ako súčasť riešenia zahrňte okrem odpovedí na otázky aj skripty s Vašou implementáciou, vygenerované logy a grafy (všetko môžete dať na Github).
 

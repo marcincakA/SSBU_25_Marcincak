@@ -4,6 +4,7 @@ import warnings
 warnings.filterwarnings("ignore", category=FutureWarning)
 
 from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
 from data.data_handling_refactored import DatasetRefactored
 from experiment.experiment import Experiment
 from plotting.experiment_plotter import ExperimentPlotter
@@ -19,10 +20,16 @@ def initialize_models_and_params():
     - param_grids: dict, dictionary of hyperparameter grids.
     """
     models = {
-        "Logistic Regression": LogisticRegression(solver='liblinear')
+        "Logistic Regression": LogisticRegression(solver='liblinear'),
+        "Decision Tree": DecisionTreeClassifier(random_state=42)
     }
     param_grids = {
-        "Logistic Regression": {"C": [0.1, 1, 10], "max_iter": [10000]}
+        "Logistic Regression": {"C": [0.1, 1, 10], "max_iter": [10000]},
+        "Decision Tree": {
+            "max_depth": [3, 5, 7, 10, None],
+            "min_samples_split": [2, 5, 10],
+            "min_samples_leaf": [1, 2, 4]
+        }
     }
     return models, param_grids
 
@@ -42,7 +49,7 @@ def run_experiment(dataset, models, param_grids, logger):
     - results: DataFrame, the results of the experiment.
     """
     logger.info("Starting the experiment...")
-    experiment = Experiment(models, param_grids, logger=logger)
+    experiment = Experiment(models, param_grids, n_replications=30, logger=logger)
     results = experiment.run(dataset.data, dataset.target)
     logger.info("Experiment completed successfully.")
     return experiment, results
@@ -75,12 +82,13 @@ def main():
     Initializes the dataset, defines models and their parameter grids,
     and invokes the replication of model training and evaluation.
     """
-    logger = Logger(log_file="outputs/application.log")
+    logger = Logger(log_file="cv6/machine_learning/outputs/application.log")
     logger.info("Application started.")
 
     dataset = DatasetRefactored()
     models, param_grids = initialize_models_and_params()
-    experiment, results = run_experiment(dataset, models, param_grids, logger)
+    experiment = Experiment(models, param_grids, n_replications=30, logger=logger)
+    results = experiment.run(dataset.data, dataset.target)
     plot_results(experiment, results, logger)
 
     logger.info("Application finished successfully.")

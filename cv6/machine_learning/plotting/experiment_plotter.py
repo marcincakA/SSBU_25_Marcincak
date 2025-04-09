@@ -6,7 +6,7 @@ from plotting.base_plotter import BasePlotter
 class ExperimentPlotter(BasePlotter):
     """A class for plotting the results of machine learning experiments."""
 
-    def plot_metric_density(self, results, metrics=('accuracy', 'f1_score', 'roc_auc')):
+    def plot_metric_density(self, results, metrics=('accuracy', 'f1_score', 'roc_auc', 'mcc')):
         """
         Plot density plots for specified metrics.
 
@@ -23,7 +23,7 @@ class ExperimentPlotter(BasePlotter):
                 fill=True,
                 common_norm=False,
                 alpha=0.5,
-                title=f'Density Plot of {metric.capitalize()}',
+                title=f'Density Plot: {metric.capitalize()}',
                 xlabel=metric.capitalize(),
                 ylabel='Density',
                 figsize=(10, 6)
@@ -70,7 +70,7 @@ class ExperimentPlotter(BasePlotter):
                 fmt='.2f',
                 cmap='Blues',
                 cbar=False,
-                title=f'Average Confusion Matrix: {model_name}',
+                title=f'Confusion Matrix: {model_name}',
                 xlabel='Predicted label',
                 ylabel='True label',
                 figsize=(6, 5)
