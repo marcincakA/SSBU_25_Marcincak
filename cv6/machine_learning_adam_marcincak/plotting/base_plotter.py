@@ -8,7 +8,7 @@ class BasePlotter:
 
     def __init__(self):
         """Initialize the BasePlotter with output directory setup."""
-        self.output_dir = "cv6/machine_learning/outputs/plots"
+        self.output_dir = "./outputs/plots"
         os.makedirs(self.output_dir, exist_ok=True)
 
     def __generic_plot(self, plot_func: Callable, *args, **kwargs):

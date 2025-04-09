@@ -28,7 +28,7 @@ class Experiment:
         self.n_replications = n_replications
         self.results = pd.DataFrame()
         self.datascaler = DatasetRefactored()
-        self.accuracies_file = "cv6/machine_learning/outputs/model_accuracies.csv"
+        self.accuracies_file = "./outputs/model_accuracies.csv"
         self.logger = logger
         os.makedirs("outputs", exist_ok=True)
         self.__initialize_csv_file()

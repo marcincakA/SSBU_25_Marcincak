@@ -82,7 +82,7 @@ def main():
     Initializes the dataset, defines models and their parameter grids,
     and invokes the replication of model training and evaluation.
     """
-    logger = Logger(log_file="cv6/machine_learning/outputs/application.log")
+    logger = Logger(log_file="./outputs/application.log")
     logger.info("Application started.")
 
     dataset = DatasetRefactored()
